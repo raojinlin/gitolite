@@ -10,13 +10,18 @@ RUN apt-get update \
 
 USER git
 COPY ./data/developer.pub /home/git/
+COPY ./data/entrypoint.sh /home/git/
+
 RUN mkdir ~/bin \
     && cd ~ \
     && git clone https://github.com/sitaramc/gitolite \
     && ~/gitolite/install -to ~/bin \
     && sudo service ssh restart \
     && rm -rf ~/gitolite \
-    && ~/bin/gitolite setup -pk ~/developer.pub
+    && ~/bin/gitolite setup -pk ~/developer.pub 
 
 WORKDIR /home/git
 EXPOSE 22
+
+
+CMD /home/git/entrypoint.sh
