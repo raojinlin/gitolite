@@ -23,5 +23,6 @@ RUN mkdir ~/bin \
 WORKDIR /home/git
 EXPOSE 22
 
+VOLUME /home/git
 
 CMD /home/git/entrypoint.sh
